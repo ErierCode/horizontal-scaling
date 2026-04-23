@@ -7,6 +7,14 @@ services:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - web
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 256M
+        reservations:
+          cpus: "0.50"
+          memory: 128M
 
   web:
     build:
@@ -17,4 +25,4 @@ services:
     working_dir: /app
     command: node src/server.js
     deploy:
-      replicas: 3
+      replicas: 5
